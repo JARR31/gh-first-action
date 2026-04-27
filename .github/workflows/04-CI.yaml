@@ -1,0 +1,60 @@
+name: 04 - CI
+run-name: Run 04 - CI by ${{ github.actor }}
+on:
+    push:
+        branches: [main]
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install NodeJS@v24
+              uses: actions/setup-node@v3
+              with:
+                node-version: 24
+            - name: Install NPM dependencies
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm ci;
+            - name: Run Linting
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run lint;
+    test:
+        needs: lint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install NodeJS@v24
+              uses: actions/setup-node@v3
+              with:
+                node-version: 24
+            - name: Install NPM Dependencies
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm ci;
+            - name: Run Testing
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run test;    
+    build:
+        needs: test
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+            - name: Install NodeJS@v24
+              uses: actions/setup-node@v3
+              with:
+                node-version: 24
+            - name: Install NPM Dependencies
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm ci;
+            - name: Build Frontend
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run build;
+            
