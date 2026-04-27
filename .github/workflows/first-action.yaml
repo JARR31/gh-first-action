@@ -1,0 +1,19 @@
+# Define the name of this workflow
+name: First Workflow
+
+# Define the triggers
+on: workflow_dispatch
+
+# Define the jobs for this workflow
+jobs:
+  fist-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Greeting
+        run: |
+          echo "Hellow world";
+      - name: Print Goodbye
+        run: |
+          echo "Good Bye";
+    
+
