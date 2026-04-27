@@ -6,8 +6,11 @@ on: workflow_dispatch
 
 # Define the jobs for this workflow
 jobs:
+  # First job to handle greeting and goodbye
   fist-job:
+    # Define the runner
     runs-on: ubuntu-latest
+    # Steps for this job
     steps:
       - name: Print Greeting
         run: |
