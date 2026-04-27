@@ -1,0 +1,13 @@
+name: 04 - Triggers
+run-name: Run 04 - Triggers by ${{ github.actor }}
+on:
+    pull_request:
+        types:
+            - opened
+    workflow_dispatch:
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Say Hello
+              run: echo "Hello"
