@@ -1,0 +1,11 @@
+name: 04 - Audit GitHub Issues
+run-name: 04 - Audit Github Issues
+on: 
+    issues:
+        types: [opened]
+jobs:
+    Output:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Output Information
+              run: echo ${{ toJson(github) }}
