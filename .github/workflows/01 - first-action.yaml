@@ -1,5 +1,5 @@
 # Define the name of this workflow
-name: First Workflow
+name: 01 - First Workflow
 
 # Define the triggers
 on: workflow_dispatch

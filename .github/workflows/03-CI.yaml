@@ -1,5 +1,5 @@
-name: 04 - CI
-run-name: Run 04 - CI by ${{ github.actor }}
+name: 03 - CI
+run-name: Run 03 - CI by ${{ github.actor }}
 on:
     push:
         branches: [main]

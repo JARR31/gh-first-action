@@ -1,4 +1,4 @@
-name: Output Information
+name: 02 - Output Information
 run-name: Run Output Information by @${{ github.actor }}
 on: workflow_dispatch
 jobs:

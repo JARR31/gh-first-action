@@ -1,5 +1,5 @@
-name: 04 - Audit GitHub Issues
-run-name: 04 - Audit Github Issues
+name: 03 - Audit GitHub Issues
+run-name: 03 - Audit Github Issues
 on: 
     issues:
         types: [opened]

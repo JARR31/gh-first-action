@@ -1,4 +1,4 @@
-name: Deploy Project
+name: 02 - Deploy Project
 run-name: Deploy Project by @${{ github.actor }}
 on:
     workflow_dispatch:
