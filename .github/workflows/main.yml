@@ -1,0 +1,10 @@
+name: 07 - Reusable
+run-name: Run ${{ github.workflow }} | ${{ github.action }} | ${{ github.actor }}
+on: workflow_call
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output Information
+        run: |
+          echo "Deploying system...."
