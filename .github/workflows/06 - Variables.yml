@@ -1,4 +1,4 @@
-name: 07 - Variables
+name: 06 - Variables
 run-name: Run ${{ github.workflow }} - ${{ github.action }} by ${{ github.actor }}
 on: workflow_dispatch
 jobs:
