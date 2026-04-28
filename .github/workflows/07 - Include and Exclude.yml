@@ -1,0 +1,39 @@
+name: 07 - Include and Exclude
+run-name: Run ${{ github.workflow }} | ${{ github.event_name }} | ${{ github.actor }}
+on:
+  workflow_dispatch
+jobs:
+  lint:
+    strategy:
+      matrix:
+        node-version: [18, 20, 22, 24]
+        include:
+          - node-version: 18
+            include-node-18: true
+          - node-version: 20
+            include-node-20: true
+        exclude:
+          - node-version: 22
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install NodeJS
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cache dependencies
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: node_modules
+          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd 07_src;
+          npm ci;
+      - name: Lint code
+        run: |
+          cd 07_src;
+          npm run lint;
