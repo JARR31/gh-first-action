@@ -39,6 +39,7 @@ jobs:
                 name: dist-files
                 path: dist
     Deploy:
+        needs: Build
         runs-on: ubuntu-latest
         steps:
             - name: Download Artifacts
@@ -47,6 +48,6 @@ jobs:
                 name: dist-files
             - name: Run ls
               run: ls -larthi
-              
+
             - name: Deploy Web App
               run: echo "Deploying app"
