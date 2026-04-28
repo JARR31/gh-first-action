@@ -12,7 +12,7 @@ jobs:
       options: >-
         --cpus 1
         --memory 1g
-        --user node
+        --user root
     steps:
       - name: Checkout
         uses: actions/checkout@v5
