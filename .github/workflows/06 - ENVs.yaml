@@ -1,0 +1,46 @@
+name: 06 - ENVs
+run-name: Run ${{ github.workflow }} - ${{ github.event_name }} - ${{ github.ref }} by ${{ github.actor }}
+on: 
+    workflow_dispatch:
+    push:
+        branches:
+            - main
+env:
+    GLOBAL_ENV: global env
+    MONGODB_DB_NAME: gha-demo
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        env:
+            JOB_ENV: testing
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Cache Dependencies
+              uses: actions/cache@v5
+              with:
+                path: ~/.npm
+                key: npm-deps-${{ hashFiles('**/package-lock.json') }}
+            
+            - name: Install NodeJS@v24
+              uses: actions/setup-node@v6
+              with:
+                node-version: 24
+
+            - name: Install NPM Dependencies
+              run: |
+                cd 06-env-project;
+                npm ci
+            
+            - name: Show ENVs
+              env:
+                STEP_ENV: This is a step's ENV
+              run: |
+                echo "${{ env.STEP_ENV }}";
+                echo "${{ env.JOB_ENV }}";
+                echo "${{ env.GLOBAL_ENV }}"
+            
+            
+              
+            
