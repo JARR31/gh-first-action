@@ -2,6 +2,8 @@ name: 07 - Reusing
 run-name: Run ${{ github.workflow }} | ${{ github.event }} | ${{ github.actor }}
 on: workflow_dispatch
 jobs:
-  reuse:
+  myjob_that_reuses:
     uses: ./.github/workflows/07_reusable.yml
+    with:
+      artifact-name: dist-files
   
