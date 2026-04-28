@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
-          cd 
+          cd 07_src;
           npm ci;
       - name: Test code
         id: run-tests
