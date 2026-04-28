@@ -1,5 +1,5 @@
-name: 05 - Outputs
-run-name: Run 05 - Outputs by ${{ github.actor }}
+name: 05 - Caching
+run-name: Run 05 - Caching by ${{ github.actor }}
 on: workflow_dispatch
 jobs:
     Build:
