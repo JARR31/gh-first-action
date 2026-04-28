@@ -1,0 +1,63 @@
+name: 05 - Outputs
+run-name: Run 05 - Outputs by ${{ github.actor }}
+on: workflow_dispatch
+jobs:
+    Build:
+        runs-on: ubuntu-latest
+        outputs:
+            dist-files-path: ${{ steps.set_output.outputs.dist-files-path }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v6
+
+            - name: Install NodeJS@v24
+              uses: actions/setup-node@v6
+              with:
+                node-version: 24
+
+            - name: Install NPM dependencies
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm ci;
+
+            - name: Run Linting
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run lint;
+
+            - name: Run Testing
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run test;
+
+            - name: Build
+              run: |
+                cd 04\ Practice\ Project\ \(Start\);
+                npm run build;
+            
+            - name: Set Output
+              id: set_output
+              run: echo "dist-files-path=04\ Practice\ Project\ \(Start\)/dist" >> $GITHUB_OUTPUT
+
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v7
+              with:
+                name: dist-files
+                path: 04\ Practice\ Project\ \(Start\)/dist
+    Deploy:
+        needs: Build
+        runs-on: ubuntu-latest
+        steps:
+            - name: Get Output
+              run: |
+                echo "Dist Files Path: ${{ needs.Build.outputs.dist-files-path }}"
+                
+            - name: Download Artifacts
+              uses: actions/download-artifact@v8
+              with:
+                name: dist-files
+            - name: Run ls
+              run: ls -larthi
+
+            - name: Deploy Web App
+              run: echo "Deploying app"
