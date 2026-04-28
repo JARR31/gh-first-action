@@ -37,7 +37,7 @@ jobs:
               uses: actions/upload-artifact@v7
               with:
                 name: dist-files
-                path: dist
+                path: 04\ Practice\ Project\ \(Start\)/dist
     Deploy:
         needs: Build
         runs-on: ubuntu-latest
