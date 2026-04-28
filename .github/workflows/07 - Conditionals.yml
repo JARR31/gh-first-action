@@ -16,9 +16,13 @@ jobs:
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+        run: |
+          cd 06-env-project;
+          npm ci;
       - name: Lint code
-        run: npm run lint
+        run: |
+          cd 06-env-project;
+          npm run lint;
   test:
     runs-on: ubuntu-latest
     steps:
@@ -28,13 +32,18 @@ jobs:
         id: cache
         uses: actions/cache@v5
         with:
-          path: ~/.npm
+          path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm ci
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd 06-env-project;
+          npm ci;
       - name: Test code
         id: run-tests
-        run: npm run test
+        run: |
+          cd 06-env-project;
+          npm run test;
       - name: Upload test report
         if: failure() && steps.run-tests.outcome == 'failure'
         uses: actions/upload-artifact@v5
@@ -51,13 +60,17 @@ jobs:
         id: cache
         uses: actions/cache@v5
         with:
-          path: ~/.npm
+          path: node_modules
           key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
-        run: npm ci
-      - name: Build website
-        id: build-website
-        run: npm run build
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cd 06-env-project;
+          npm ci;
+      - name: Lint code
+        run: |
+          cd 06-env-project;
+          npm run build;
       - name: Upload artifacts
         uses: actions/upload-artifact@v5
         with:
