@@ -1,0 +1,42 @@
+name: 09 - Composite Actions
+run-name: Run ${{ github.workflow }} | ${{ github.event_name }} | ${{ github.actor }}
+on:
+  workflow_dispatch
+env:
+  SRC_DIR_PATH: "09_src"
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v5
+      - name: Load & Cache dependencies
+        uses: ./.github/actions/cached-deps
+        with:
+          use-cache: 'true'
+          folder: ${{ env.SRC_DIR_PATH }}
+      - name: Lint code
+        working-directory: ${{ env.SRC_DIR_PATH }}
+        shell: bash
+        run: npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v5
+      - name: Load & Cache dependencies
+        uses: ./.github/actions/cached-deps
+        with:
+          use-cache: 'true'
+          folder: ${{ env.SRC_DIR_PATH }}
+      - name: Test code
+        id: run-tests
+        working-directory: ${{ env.SRC_DIR_PATH }}
+        shell: bash
+        run: npm run test
+      - name: Upload test report
+        if: failure() && steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v5
+        with:
+          name: test-report
+          path: test.json
